@@ -1,0 +1,16 @@
+{
+  "tareas": [
+    {
+      "id": 1,
+      "nombre": "Hacer tarea programacion",
+      "descripcion": "Programacion orientada a objetos",
+      "terminada": true
+    },
+    {
+      "id": 2,
+      "nombre": "Estudiar Bloc",
+      "descripcion": "Eventos, estados y BlocBuilder",
+      "terminada": false
+    }
+  ]
+}

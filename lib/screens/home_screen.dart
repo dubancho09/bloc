@@ -54,18 +54,31 @@ class _HomeScreenState extends State<HomeScreen> {
             children: [
               Text('Tareas', style: TextStyle(fontSize: 20),),
               SizedBox(height: 20,),
-              BlocBuilder<TareaBloc, TareaState>(
+              BlocConsumer<TareaBloc, TareaState>(
+                listenWhen: (prev, curr) =>
+                    curr.status == TareaStatus.error && prev.status != curr.status,
+                listener: (context, state) {
+                  ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(content: Text(state.error ?? 'Error de conexión')),
+                  );
+                },
                 builder: (context, state) {
+                  if (state.status == TareaStatus.cargando) {
+                    return const Padding(
+                      padding: EdgeInsets.all(16),
+                      child: CircularProgressIndicator(),
+                    );
+                  }
                   return Column(
                     children: [
-                      for (final (i, tarea) in state.tareas.indexed) ...[
+                      for (final tarea in state.tareas) ...[
                         CustomListCard(
                           nombre: tarea.nombre,
                           descripcion: tarea.descripcion,
                           estado: tarea.terminada,
                           onChanged: (_) => context
                               .read<TareaBloc>()
-                              .add(TareaEstadoCambiado(i)),
+                              .add(TareaEstadoCambiado(tarea)),
                         ),
                         SizedBox(height: 20,),
                       ],

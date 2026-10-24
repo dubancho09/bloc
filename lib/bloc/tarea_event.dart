@@ -7,6 +7,10 @@ sealed class TareaEvent extends Equatable {
   List<Object?> get props => [];
 }
 
+class TareasCargadas extends TareaEvent {
+  const TareasCargadas();
+}
+
 class TareaAgregada extends TareaEvent {
   final Tarea tarea;
 
@@ -17,10 +21,10 @@ class TareaAgregada extends TareaEvent {
 }
 
 class TareaEstadoCambiado extends TareaEvent {
-  final int indice;
+  final Tarea tarea;
 
-  const TareaEstadoCambiado(this.indice);
+  const TareaEstadoCambiado(this.tarea);
 
   @override
-  List<Object?> get props => [indice];
+  List<Object?> get props => [tarea];
 }
