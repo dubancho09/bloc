@@ -5,11 +5,13 @@ class CustomListCard extends StatelessWidget {
   final String nombre;
   final String descripcion;
   final bool estado;
+  final ValueChanged<bool>? onChanged;
 
   const CustomListCard({
     required this.nombre,
     required this.descripcion,
     required this.estado,
+    this.onChanged,
     super.key
   });
 
@@ -29,7 +31,7 @@ class CustomListCard extends StatelessWidget {
               offset: Offset(0, 3), // changes position of shadow
             ),
           ],
-            
+
           ),
           child: Padding(
             padding: const EdgeInsets.all(8.0),
@@ -41,11 +43,11 @@ class CustomListCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    Text(nombre), 
+                    Text(nombre),
                     Text(descripcion)
                   ],
                 ),
-                Switch(value: estado, onChanged: (value){})
+                Switch(value: estado, onChanged: onChanged)
               ],
             ),
           ),
